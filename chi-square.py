@@ -25,3 +25,4 @@ plt.show()
 # perform a chi-squared test
 chi, p = stats.chisquare(freq.values())
 
+print("The Chi statistic is " + str(chi) + " and the p-value of the Chi-squared test is " + str(p))

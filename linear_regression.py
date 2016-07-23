@@ -7,6 +7,8 @@ Created on Sat Jul 23 10:07:54 2016
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
+import statsmodels.api as sm
 
 loansData = pd.read_csv('https://github.com/Thinkful-Ed/curric-data-001-data-sets/raw/master/loans/loansData.csv')
 
@@ -38,3 +40,27 @@ plt.show()
 plt.figure()
 a = pd.scatter_matrix(loansData, alpha=0.05, figsize=(10,10), diagonal='hist')
 plt.show()
+
+
+## Linear Regression 
+# extract variables from loansData
+intrate = loansData['Interest.Rate']
+loanamt = loansData['Amount.Requested']
+fico = loansData['FICO.Score']
+
+# The dependent variable
+y = np.matrix(intrate).transpose()
+# The independent variables shaped as columns
+x1 = np.matrix(fico).transpose()
+x2 = np.matrix(loanamt).transpose()
+
+# create an input matrix 
+x = np.column_stack([x1,x2])
+
+# create linear model
+X = sm.add_constant(x)
+model = sm.OLS(y,X)
+f = model.fit()
+
+# output the results summary
+f.summary()

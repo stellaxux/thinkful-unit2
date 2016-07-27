@@ -64,3 +64,6 @@ f = model.fit()
 
 # output the results summary
 f.summary()
+
+# save cleaned data to csv
+loansData.to_csv('loansData_clean.csv', header=True, index=False)
